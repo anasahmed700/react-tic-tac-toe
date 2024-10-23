@@ -6,15 +6,17 @@ const initialBoard = [
     [null, null, null]
 ];
 
-const GameBoard = () => {
+const GameBoard = ({ onSelectSquare, activePlayerSymbol}) => {
     const [board, setBoard] = useState(initialBoard);
     function handleSelectSquare(rowIndex, colIndex) {
         setBoard((prevBoard) => {
             // copy array to update immutably
             const updatedBoard = [...prevBoard.map(innerArray => [...innerArray])];
-            updatedBoard[rowIndex][colIndex] = 'X';
+            updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
             return updatedBoard;
-        })
+        });
+
+        onSelectSquare();
     }
     return (
         <ol id="game-board">
